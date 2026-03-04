@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My ToDo</title>
+    <link rel="stylesheet" href="{% static 'todo.css' %}">
+</head>
+<body>
+
+<div class="todo-container">
+    <h2>My To-Do List 📝</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="note" placeholder="Enter your task..." required>
+        <button type="submit">Add</button>
+    </form>
+
+    <ul>
+        {% for note in notes %}
+        <li class="{% if note.completed %}done{% endif %}">
+            <a href="{% url 'toggle' note.id %}" class="btn-toggle" title="Toggle">✔</a>
+            <span class="note-text">{{ note.note }}</span>
+            <a href="{% url 'edit_note' note.id %}" class="btn-edit" title="Edit">Edit</a>
+            <form action="{% url 'delete_note' note.id %}" method="POST" class="btn-delete-form">
+                {% csrf_token %}
+                <button type="submit" class="btn-delete" title="Delete">Delete</button>
+            </form>
+        </li>
+        {% empty %}
+        <p>No tasks yet 🎉</p>
+        {% endfor %}
+    </ul>
+
+    <div class="nav-links">
+        <a href="{% url 'profile' %}">Edit Profile</a>
+        <a href="{% url 'logout' %}" class="logout">Logout</a>
+    </div>
+</div>
+
+</body>
+</html>

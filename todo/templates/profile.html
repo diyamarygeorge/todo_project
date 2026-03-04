@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - My ToDo</title>
+    <link rel="stylesheet" href="{% static 'todo.css' %}">
+    <link rel="stylesheet" href="{% static 'profile.css' %}">
+</head>
+<body class="profile-page">
+
+<main class="profile-card">
+    <h1 class="profile-title">Profile</h1>
+
+    <section class="profile-section" aria-labelledby="account-heading">
+        <h2 id="account-heading" class="profile-section-title">Account details</h2>
+        <form method="POST" class="profile-form" action="">
+            {% csrf_token %}
+            <div class="form-field">
+                {{ profile_form.username.label_tag }}
+                {{ profile_form.username }}
+                {{ profile_form.username.errors }}
+            </div>
+            <div class="form-field">
+                {{ profile_form.email.label_tag }}
+                {{ profile_form.email }}
+                {{ profile_form.email.errors }}
+            </div>
+            <button type="submit" name="update_profile" class="btn btn-primary">Update profile</button>
+        </form>
+    </section>
+
+    <hr class="profile-divider">
+
+    <section class="profile-section" aria-labelledby="password-heading">
+        <h2 id="password-heading" class="profile-section-title">Change password</h2>
+        <form method="POST" class="profile-form" action="">
+            {% csrf_token %}
+            <div class="form-field">
+                {{ password_form.old_password.label_tag }}
+                {{ password_form.old_password }}
+                {{ password_form.old_password.errors }}
+            </div>
+            <div class="form-field">
+                {{ password_form.new_password1.label_tag }}
+                {{ password_form.new_password1 }}
+                {{ password_form.new_password1.errors }}
+            </div>
+            <div class="form-field">
+                {{ password_form.new_password2.label_tag }}
+                {{ password_form.new_password2 }}
+                {{ password_form.new_password2.errors }}
+            </div>
+            <button type="submit" name="change_password" class="btn btn-primary">Change password</button>
+        </form>
+    </section>
+
+    <a href="{% url 'home' %}" class="profile-back-link">Back to To-Do</a>
+</main>
+
+</body>
+</html>
