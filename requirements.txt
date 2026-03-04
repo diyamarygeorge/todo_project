@@ -1,5 +1,5 @@
 # Editable install with no version control (ai-helpers==0.0.1)
--e c:\users\asus\downloads\ai-powered-web-assistant
+# -e c:\users\asus\downloads\ai-powered-web-assistant
 ai-helpers-yourname==0.0.2
 annotated-types==0.7.0
 anyio==4.12.0
